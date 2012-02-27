@@ -3,6 +3,7 @@ This is firephp implementation in Common Lisp.
 Currently it can send 2 types of firephp messages as FirePHPCore library can - dump messages and log messages (with type log, info, warn).
 Messages must be simple structures like lists, strings, numbers etc.
 Server supported is hunchentoot, but can be easily extended to work with other servers.
+Library does not support FirePHP 1.0 protocol.
 
 On firefox work both types of messages work.
 
