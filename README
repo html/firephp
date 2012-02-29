@@ -11,21 +11,7 @@ On google chrome there are 2 cases.
 
 Dump messages work with plugin webug and only if no log messages present in response.
 
-Log messages work on FeverPHP. If dump messages present in response, FeverPHP just don't display them.
-
-FeverPHP works on linux only after renaming one file. Watch below.
-
-find ~/.config/google-chrome/ -name "Js"
-
-If more than one directory found check which belongs to FeverPHP plugin.
-Than go to directory and 
-
-ln -s background.js Background.js
-
-or 
-
-mv background.js Background.js
-
+Log messages work on FeverPHP. If dump messages present in response, FeverPHP just doesn't display them.
 
 Here is the code to send dump messages.
 
