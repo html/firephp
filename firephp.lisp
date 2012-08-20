@@ -4,7 +4,7 @@
    "FirePHP protocol server implementation"))
 
 (in-package :firephp)
-(export '(send-message))
+(export '(send-message fb))
 
 (defun split-into-chunks (sequence &optional (size 1))
   (let ((list (copy-seq sequence)))
@@ -70,3 +70,10 @@
 
     (send-header "X-Wf-1-Index" (write-to-string (- message-index 1)))))
 
+(defun fb (&rest args)
+  "Simple debug function applies to any arguments and just displays them"
+  (send-message 
+    (format nil "~{#~d ~A~^<br/>~}" 
+            (loop for i from 1 
+                  for j in (mapcar #'hunchentoot:escape-for-html (mapcar #'princ-to-string args))
+                  append (list i j))) :type :log))
