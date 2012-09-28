@@ -75,5 +75,5 @@
   (send-message 
     (format nil "~{#~d ~A~^<br/>~}" 
             (loop for i from 1 
-                  for j in (mapcar #'hunchentoot:escape-for-html (mapcar #'princ-to-string args))
+                  for j in (mapcar #'hunchentoot:escape-for-html (mapcar #'prin1-to-string args))
                   append (list i j))) :type :log))
