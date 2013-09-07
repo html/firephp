@@ -23,6 +23,7 @@ And to send log messages just need to
 (firephp:send-message "Test" :type :log)
 (firephp:send-message "Test" :type :log :label "TestLabel")
 
-Small debug wrapper included. Try 
+Small debug wrappers included. Try 
 
 (firephp:fb "test1" "test2" (list 1 2 3))
+(firephp:descr "test1" "test2" (list 1 2 3))

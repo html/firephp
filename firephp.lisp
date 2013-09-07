@@ -26,6 +26,9 @@
       0)))
 
 (defun send-message (message &rest args &key (type :dump) (label nil))
+  (unless (boundp 'hunchentoot:*reply*)
+    (warn "It seems like hunchentoot is not started, trying to send message ~A" message)
+    (return-from send-message))
   (let* 
     ((dump (equal type :dump))
      (structure-index (if dump 2 1))
@@ -77,3 +80,14 @@
             (loop for i from 1 
                   for j in (mapcar #'hunchentoot:escape-for-html (mapcar #'prin1-to-string args))
                   append (list i j))) :type :log))
+
+(defun descr (&rest args)
+  (send-message 
+    (ppcre:regex-replace-all 
+      (string #\Newline)
+      (hunchentoot:escape-for-html 
+        (with-output-to-string (s)
+          (loop for i in args do 
+                (describe i s))))
+      "<br/>")
+    :type :log))
