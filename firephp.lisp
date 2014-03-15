@@ -4,7 +4,7 @@
    "FirePHP protocol server implementation"))
 
 (in-package :firephp)
-(export '(send-message fb))
+(export '(send-message fb descr *escape-html-p*))
 
 (defun split-into-chunks (sequence &optional (size 1))
   (let ((list (copy-seq sequence)))
@@ -73,21 +73,30 @@
 
     (send-header "X-Wf-1-Index" (write-to-string (- message-index 1)))))
 
+(defvar *escape-html-p* t)
+
+(defun maybe-escape-html (str)
+  (if *escape-html-p* 
+    (hunchentoot:escape-for-html str)
+    str))
+
 (defun fb (&rest args)
   "Simple debug function applies to any arguments and just displays them"
   (send-message 
-    (format nil "~{#~d ~A~^<br/>~}" 
+    (format nil "~{#~d ~A~^~[<br/>~;~%~]~}" 
             (loop for i from 1 
-                  for j in (mapcar #'hunchentoot:escape-for-html (mapcar #'prin1-to-string args))
-                  append (list i j))) :type :log))
+                  for j in (mapcar #'maybe-escape-html (mapcar #'prin1-to-string args))
+                  append (list i j (if *escape-html-p* 0 1)))) :type :log))
 
 (defun descr (&rest args)
   (send-message 
     (ppcre:regex-replace-all 
       (string #\Newline)
-      (hunchentoot:escape-for-html 
+      (maybe-escape-html 
         (with-output-to-string (s)
           (loop for i in args do 
                 (describe i s))))
-      "<br/>")
+      (if *escape-html-p* 
+        "<br/>"
+        (string #\Newline)))
     :type :log))

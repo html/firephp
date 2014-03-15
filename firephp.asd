@@ -5,7 +5,7 @@
 
 (defsystem firephp
  :name "firephp"
- :version "0.0.2"
+ :version (:read-from-file "version.lisp-expr")
  :maintainer "Olexiy Zamkoviy"
  :author "Olexiy Zamkoviy"
  :licence "LLGPL"
