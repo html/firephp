@@ -27,3 +27,6 @@ Small debug wrappers included. Try
 
 (firephp:fb "test1" "test2" (list 1 2 3))
 (firephp:descr "test1" "test2" (list 1 2 3))
+
+Currently works with [FirePHP4Chrome](https://chrome.google.com/webstore/detail/firephp4chrome/gpgbmonepdpnacijbbdijfbecmgoojma?hl=ru) for Google Chrome 
+Does not work on Firefox Firephp plugin
