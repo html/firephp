@@ -5,28 +5,30 @@ Messages must be simple structures like lists, strings, numbers etc.
 Server supported is hunchentoot, but can be easily extended to work with other servers.
 Library does not support FirePHP 1.0 protocol.
 
-On firefox work both types of messages work.
-
 On google chrome there are 2 cases. 
 
 Dump messages work with plugin webug and only if no log messages present in response.
 
-Log messages work on FeverPHP. If dump messages present in response, FeverPHP just doesn't display them.
-
 Here is the code to send dump messages.
 
+```
 (firephp:send-message "Test")
 (firephp:send-message "Test" :label "TestLabel")
+```
 
 And to send log messages just need to 
 
+```
 (firephp:send-message "Test" :type :log)
 (firephp:send-message "Test" :type :log :label "TestLabel")
+```
 
 Small debug wrappers included. Try 
 
+```
 (firephp:fb "test1" "test2" (list 1 2 3))
 (firephp:descr "test1" "test2" (list 1 2 3))
+```
 
-Currently works with [FirePHP4Chrome](https://chrome.google.com/webstore/detail/firephp4chrome/gpgbmonepdpnacijbbdijfbecmgoojma?hl=ru) for Google Chrome 
+Currently works with [FirePHP4Chrome](https://chrome.google.com/webstore/detail/firephp4chrome/gpgbmonepdpnacijbbdijfbecmgoojma?hl=ru) for Google Chrome.
 Does not work on Firefox Firephp plugin
